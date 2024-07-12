@@ -4573,7 +4573,7 @@ var htmx = (function() {
         redirectSwapSpec = parseJSON(redirectPath)
         // what's the best way to throw an error if the user didn't include this
         redirectPath = redirectSwapSpec.path
-        if (redirectSwapSpec.push != 'false' ) {
+        if (redirectSwapSpec.push !== 'false' ) {
           pushPath = redirectSwapSpec.push || redirectPath
           delete redirectSwapSpec.push
         }
