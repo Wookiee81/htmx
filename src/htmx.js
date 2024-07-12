@@ -4566,16 +4566,23 @@ var htmx = (function() {
     if (hasHeader(xhr, /HX-Location:/i)) {
       saveCurrentPageToHistory()
       let redirectPath = xhr.getResponseHeader('HX-Location')
+      var pushPath
       /** @type {HtmxAjaxHelperContext&{path:string}} */
       var redirectSwapSpec
       if (redirectPath.indexOf('{') === 0) {
         redirectSwapSpec = parseJSON(redirectPath)
         // what's the best way to throw an error if the user didn't include this
         redirectPath = redirectSwapSpec.path
+        if (redirectSwapSpec.push != 'false' ) {
+          pushPath = redirectSwapSpec.push || redirectPath
+          delete redirectSwapSpec.push
+        }
         delete redirectSwapSpec.path
       }
       ajaxHelper('get', redirectPath, redirectSwapSpec).then(function() {
-        pushUrlIntoHistory(redirectPath)
+        if (pushPath !== undefined) { 
+          pushUrlIntoHistory(pushPath)
+        }
       })
       return
     }
