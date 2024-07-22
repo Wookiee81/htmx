@@ -20,6 +20,7 @@ HX-Location: {"path":"/test2", "target":"#testdiv"}
 
 Path is required and is url to load the response from. The rest of the data mirrors the [`ajax` api](@/api.md#ajax) context, which is:
 
+* `push` - push a specific url into history, default behaviour pushes the "path" into history, "false" to disable
 * `source` - the source element of the request
 * `event` - an event that "triggered" the request
 * `handler` - a callback that will handle the response HTML
